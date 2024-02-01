@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:powershell="http://www.mulesoft.org/schema/mule/powershell" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/powershell http://www.mulesoft.org/schema/mule/powershell/current/mule-powershell.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7924c3d1-53b9-4303-a443-ea02c2363e38" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<powershell:config name="Powershell_Configuration" doc:name="Powershell Configuration" doc:id="c8cae492-e43f-4b4c-a9ef-773a96c17ae2" >
+		<powershell:powershell-connection host="10.410.10.10" username="a" password="b" />
+	</powershell:config>
+	<flow name="powershell-connectorFlow" doc:id="73d47f80-0fc4-4133-9291-da8420f4f728" >
+		<http:listener doc:name="Listener" doc:id="5e7523c4-61d2-4d68-b3ad-8bb284f4f302" config-ref="HTTP_Listener_config" path="/command"/>
+		<powershell:execute-command doc:name="Execute command" doc:id="07d35a39-7e85-4119-a0b6-221510692233" config-ref="Powershell_Configuration" command="pwd"/>
+	</flow>
+</mule>
